@@ -6,12 +6,20 @@ import {useEffect} from "react"
 import { onAuthStateChanged } from "firebase/auth";
 import { addUser,removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/contant";
+import { toggleGptBtn } from "../utils/gptSlice";
+import { changeLang } from "../utils/configSlice";
 
 
 const Header = () => {
   const navigate=useNavigate();
   const user=useSelector((store)=>store.user);
   const dispatch=useDispatch();
+
+   const gptBtn=useSelector(store=>store.gpt.showGptBtn);
+
+  const handleToggleGptBtn=()=>{
+    dispatch(toggleGptBtn());
+  }
 
   const handleSignOut=()=>{
     signOut(auth).then(() => {
@@ -40,18 +48,30 @@ const Header = () => {
     return ()=>unsubscribe();
 },[]);
 
+const handleLangChange=(e)=>{
+  dispatch(changeLang(e.target.value));
+}
+
 
   return (
     <div className='flex absolute justify-between w-screen z-20'>
         <div>
           <img className='w-48  ml-40  pt-3 ' src={LOGO_URL}/>
         </div>
-        
+        {gptBtn&&
+        <select onChange={handleLangChange}
+        className="px-2  my-8 font-medium text-white bg-slate-500 -mr-[50%]">
+          <option>English</option>
+          <option>Hindi</option>
+          <option>French</option>
+        </select>
+        }
 
         {user&&
         (<div className="flex mx-12">
+          <button onClick={handleToggleGptBtn} className="bg-red-600 px-2 rounded-sm  my-8 font-medium text-white">{gptBtn?"Home":"GPTSearch"}</button>
           <img className="w-10 h-10 my-8 mx-1" alt="userProfile" src={user.photoURL}/>
-          <button onClick={handleSignOut} className='bg-red-600 px-2 py-1 rounded-sm   my-8 font-medium text-white'>SignOut</button>
+          <button onClick={handleSignOut} className='bg-red-600 px-2  rounded-sm   my-8 font-medium text-white'>SignOut</button>
         </div>)}
     </div>
   )
