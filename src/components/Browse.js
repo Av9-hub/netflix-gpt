@@ -6,11 +6,13 @@ import SecondaryContainer from "./SecondaryContainer"
 import useUpcomingMovies from '../hooks/useUpcomingMovies';
 import { useSelector } from 'react-redux';
 import GptPage from './GptPage';
+import useTopRatedMovies from '../hooks/useTopRatedMovies';
 
 
 const Browse = () => {
   
   useNowPlayingMovies();
+  useTopRatedMovies();
   usePopularMovies();
   useUpcomingMovies();
   const showGptPage=useSelector(store=>store.gpt.showGptBtn);

@@ -6,8 +6,19 @@ export const API_OPTION = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YTY1NmEyNTViN2ZlNDg4MDhhY2QyOWYzNGQ2MWZiNSIsIm5iZiI6MTc1NzY2MDE2OC41MjE5OTk4LCJzdWIiOiI2OGMzYzQwODE3NDI5ZWFjYmRkMjYzNGQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.nDTOOV6nyI7Cctx2psnzlxP8SqnKsCcu_OIiZDXSdas'
+    Authorization: "Bearer "+ process.env.REACT_APP_TMDB_KEY
   }
 };
 
 export const MOVIE_IMG_URL="https://image.tmdb.org/t/p/w500";
+
+export const SUPPORTED_LANGUAGES=[
+  {identifier:"English",name:"English"},
+  {identifier:"Hindi",name:"Hindi"},
+  {identifier:"French",name:"French"},
+];
+
+
+
+export const GEMINI_KEY=process.env.REACT_APP_GEMINI_KEY
+

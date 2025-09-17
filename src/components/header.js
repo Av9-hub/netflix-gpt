@@ -8,6 +8,7 @@ import { addUser,removeUser } from "../utils/userSlice";
 import { LOGO_URL } from "../utils/contant";
 import { toggleGptBtn } from "../utils/gptSlice";
 import { changeLang } from "../utils/configSlice";
+import { SUPPORTED_LANGUAGES } from "../utils/contant";
 
 
 const Header = () => {
@@ -61,9 +62,11 @@ const handleLangChange=(e)=>{
         {gptBtn&&
         <select onChange={handleLangChange}
         className="px-2  my-8 font-medium text-white bg-slate-500 -mr-[50%]">
-          <option>English</option>
-          <option>Hindi</option>
-          <option>French</option>
+          {SUPPORTED_LANGUAGES.map((lang)=>(
+            <option key={lang.identifier} value={lang.identifier}>
+              {lang.name}
+            </option>
+          ))}
         </select>
         }
 
